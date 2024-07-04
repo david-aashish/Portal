@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login Page
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #FFFDD0;
+    }
+    .custom {
+        width: 60%;
+        margin: 0 auto;
+        color:black;
+        padding: 30px;             
+        border-radius: 10px;       
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
+        background-color:lightgrey;
+    }
+</style>
+    <div class = "container mt-5 custom">
+    <h2>Login</h2>
+    <form action='/login' method = 'POST'>
+        <div class = "mb-3">
+        <label for="email">Email:</label><br>
+        </div>
+        <div class = "mb-3">
+        <input type="text" id="email" name="email"><br>
+        </div>
+        <div class = "mb-3">
+        <label for="password">Password:</label><br>
+        </div>
+        <div class = "mb-3">
+        <input type="password" id="password" name="password"><br>
+        <a href="#">Forgot Password?</a>
+        <br>
+        <br>
+        <h6>Dont have an existing account? Please click here to create a new account:- <a href="{{url_for('signup')}}">Sign-Up</a></h6>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="text-danger">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+        <input type="submit" value="Login" class = "btn btn-secondary">
+    </form>
+</div>
+{%endblock%}
