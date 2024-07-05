@@ -11,10 +11,10 @@ app.secret_key = 'Nottotellanyone'
 app.config['RECAPTCHA_PUBLIC_KEY'] = '6LcmSAgqAAAAAKsl7rFHn19dSiTmri0sIufKTJSr'
 
 #setting up MySQL configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'users'
+app.config['MYSQL_HOST'] = 'r4919aobtbi97j46.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+app.config['MYSQL_USER'] = 'whcsaeotgym8rqym'
+app.config['MYSQL_PASSWORD'] = 'alyvd3pkboxnhdns'
+app.config['MYSQL_DB'] = 'wrpcaa0vl3yyd72l'
 
 mysql = MySQL(app)
 
