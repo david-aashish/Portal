@@ -1,0 +1,102 @@
+{% block header %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color:lightgrey;
+    }
+    .header {
+        background-color: #FFDAB9;
+        padding: 10px;
+        margin-bottom: 0px;
+    }
+    .header h1 {
+        color: black;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .header-links {
+        text-align: center;
+        position: relative;
+    }
+    .badge-custom {
+        font-size: 1rem; 
+        padding: 10px 20px; 
+        border-radius: 50px;
+    }
+    .header-links a {
+        text-decoration:none;
+        margin: 30px;
+    }
+    .header-links img {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .dropdown {
+        display: none;
+        position: absolute;
+        right: 10px;
+        background-color: white;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+        z-index: 1;
+    }
+    .dropdown a {
+        color: black;
+        display: block;
+    }
+    .dropdown a:hover {
+        background-color: lightgray;
+    }
+</style>
+<div class="header">
+    <h1>Welcome to Course Registration Portal</h1>
+    <div class="header-links">
+        <a href="{{ url_for('courses') }}">
+            <span class="badge rounded-pill text-bg-dark badge-custom">Home</span>
+            </a>
+        <a href="{{ url_for('register_courses') }}">
+        <span class="badge rounded-pill text-bg-dark badge-custom">Register Courses</span>
+        </a>
+        <a href="{{ url_for('registered_courses') }}">
+        <span class="badge rounded-pill text-bg-dark badge-custom">Registered Courses</span>
+        </a>
+        <a href="{{ url_for('reference_books') }}">
+            <span class="badge rounded-pill text-bg-dark badge-custom">Reference Books</span>
+            </a>
+        <img src="{{ url_for('static',filename = 'settings.icon.jpg')}}" height="25px" width="25px" onclick="toggleDropdown()">
+        <div class="dropdown" id="dropdownMenu">
+            <a href="{{ url_for('edit_profile') }}">Edit Profile</a>
+            <a href="{{ url_for('delete_account') }}" onclick="confirmDeletion()">Delete Account</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+</div>
+<script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById('dropdownMenu');
+        if (dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+        } else {
+            dropdown.style.display = 'block';
+        }
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('img')) {
+            var dropdown = document.getElementById('dropdownMenu');
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+            }
+        }
+    }
+
+    function confirmDeletion(event){
+        if(!confirm('Are you sure you want to delete your account?')){
+            event.preventDefault();
+        }
+    }
+</script>
+{% endblock header %}

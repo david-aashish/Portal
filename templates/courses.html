@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Courses
+{% endblock  %}
+
+{% block content %}
+    {% include "header.html" %}
+
+    {% block main_content %}
+    <style>
+        .alert{
+            padding: 10px;
+            background-color: #f44336;
+            color: white;
+            margin: 15px;
+        }
+        .scroll {
+            font-family: cursive;
+            color:#B804FC;
+        }
+        .slideshow{
+            margin: auto;
+            width: 70%;
+            height: 500px;
+            background-size: 100% 100%;
+            background-image:url('{{url_for('static',filename ='image1.jpg')}}');
+            box-shadow: rgba(149,157,165,0.9) 0px 8px 24px;
+            animation: changeImage 20s linear infinite;
+        }
+        @keyframes changeImage {
+            0% {
+                background-image: url('{{url_for('static',filename ='image1.jpg')}}');
+            }
+            20% {
+                background-image: url('{{url_for('static',filename ='image2.jpg')}}');
+            }
+            40% {
+                background-image: url('{{url_for('static',filename ='image3.jpg')}}');
+            }
+            60% {
+                background-image: url('{{url_for('static',filename ='image4.jpg')}}');
+            }
+            80% {
+                background-image: url('{{url_for('static',filename ='image5.jpeg')}}');
+            }
+            100% {
+                background-image: url('{{url_for('static',filename ='image6.jpg')}}');
+            }
+        }
+    </style>
+    <marquee direction="left" scrollamount="20" style="background-color:#525354" class="scroll" loop="5"><h4><b>Note:-</b>The dead-line for the Course Registration is 17/09/2024. &nbsp; You will not be able to edit your courses after the deadline.</h4></marquee>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert">
+                    <ul>
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div class = "slideshow"></div>
+        {% endblock main_content %}
+    {% include "footer.html" %}
+{% endblock %}
