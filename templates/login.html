@@ -1,53 +1,82 @@
-{% extends "base.html" %}
-
-{% block title %}
-Login Page
-{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %} Login Page {% endblock %} {% block
+content %}
 <style>
-    body {
-        background-color: #FFFDD0;
-    }
+  body {
+    background-color: #fffdd0;
+  }
+  .custom {
+    width: 60%;
+    margin: 0 auto;
+    color: black;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    background-color: lightgrey;
+  }
+  .help {
+    margin-top: 1rem;
+  }
+  .form-label {
+    margin-bottom: 0.2rem; /* Reduce gap between label and input */
+  }
+  .form-control {
+    margin-bottom: 1rem; /* Reduce gap between input fields */
+  }
+  .form-group {
+    margin-bottom: 0.5rem; /* Reduce gap between label-input pairs */
+  }
+  .btn.btn-secondary {
+    margin-top: 1rem;
+  }
+  @media (min-width: 425px) and (max-width: 767px) {
     .custom {
-        width: 60%;
-        margin: 0 auto;
-        color:black;
-        padding: 30px;             
-        border-radius: 10px;       
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
-        background-color:lightgrey;
+      width: 70%;
+      padding: 1.5rem;
     }
+    .help {
+      font-size: 1rem;
+    }
+  }
+  @media (min-width: 320px) and (max-width: 424px) {
+    .custom {
+      width: 80%;
+      padding: 1rem;
+    }
+    .help {
+      font-size: 0.7rem;
+    }
+  }
 </style>
-    <div class = "container mt-5 custom">
-    <h2>Login</h2>
-    <form action='/login' method = 'POST'>
-        <div class = "mb-3">
-        <label for="email">Email:</label><br>
-        </div>
-        <div class = "mb-3">
-        <input type="text" id="email" name="email"><br>
-        </div>
-        <div class = "mb-3">
-        <label for="password">Password:</label><br>
-        </div>
-        <div class = "mb-3">
-        <input type="password" id="password" name="password"><br>
-        <a href="#">Forgot Password?</a>
-        <br>
-        <br>
-        <h6>Dont have an existing account? Please click here to create a new account:- <a href="{{url_for('signup')}}">Sign-Up</a></h6>
-        </div>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-            {% for category, message in messages %}
-                <li class="text-danger">{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-        <input type="submit" value="Login" class = "btn btn-secondary">
-    </form>
+<div class="container mt-5 custom">
+  <h2>Login</h2>
+  <form action="/login" method="POST">
+    <div class="form-group">
+      <label for="email" class="form-label">Email:</label>
+      <input type="text" id="email" name="email" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="password" class="form-label">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="form-control"
+      />
+      <a href="#" class="d-block mt-2">Forgot Password?</a>
+      <h6 class="help">
+        Don't have an existing account? Please click here to create a new
+        account: <a href="{{ url_for('signup') }}">Sign-Up</a>
+      </h6>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="text-danger">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <input type="submit" value="Login" class="btn btn-secondary" />
+  </form>
 </div>
 {%endblock%}
