@@ -8,7 +8,8 @@ from modules.editprofile import EditProfileform
 
 app = Flask(__name__)
 app.secret_key = 'Nottotellanyone'
-app.config['RECAPTCHA_PUBLIC_KEY'] = '6LcmSAgqAAAAAKsl7rFHn19dSiTmri0sIufKTJSr'
+app.config['RECAPTCHA_PUBLIC_KEY'] = '6LcWYgoqAAAAAMzciSqgR3_AFtFUoC6-83YGOGuA'
+app.config['RECAPTCHA_PRIVATE_KEY'] = '6LcWYgoqAAAAAI2GkF7jOGWwuTsbjyvTa__ZnaQn'
 
 #setting up MySQL configuration
 app.config['MYSQL_HOST'] = 'r4919aobtbi97j46.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
