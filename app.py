@@ -190,7 +190,7 @@ def edit_profile():
             newpassword = form.newpassword.data
         else:
             newpassword = form.oldpassword.data
-            hidden_newpassword = bcrypt.hashpw(newpassword.encode('utf-8'),bcrypt.gensalt())
+        hidden_newpassword = bcrypt.hashpw(newpassword.encode('utf-8'),bcrypt.gensalt()) 
             # checking if form is completely unchanged
         if (firstname == info[0] and middlename == info[1] and lastname == info[2] and
             mobilenumber == info[3] and newpassword == password):
