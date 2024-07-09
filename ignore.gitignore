@@ -1,0 +1,8 @@
+# Ignore environment variables file
+pw.env
+
+# Ignore Python bytecode files
+*.pyc
+
+# Ensuring this file is ignored itself
+.gitignore

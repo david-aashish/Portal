@@ -5,17 +5,10 @@ from flask_mysqldb import MySQL
 from modules.login import Loginform
 from modules.signup import Signupform
 from modules.editprofile import EditProfileform
+from config import Config
 
 app = Flask(__name__)
-app.secret_key = 'Nottotellanyone'
-app.config['RECAPTCHA_PUBLIC_KEY'] = '6LcWYgoqAAAAAMzciSqgR3_AFtFUoC6-83YGOGuA'
-app.config['RECAPTCHA_PRIVATE_KEY'] = '6LcWYgoqAAAAAI2GkF7jOGWwuTsbjyvTa__ZnaQn'
-
-#setting up MySQL configuration
-app.config['MYSQL_HOST'] = 'r4919aobtbi97j46.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
-app.config['MYSQL_USER'] = 'whcsaeotgym8rqym'
-app.config['MYSQL_PASSWORD'] = 'alyvd3pkboxnhdns'
-app.config['MYSQL_DB'] = 'wrpcaa0vl3yyd72l'
+app.config.from_object(Config)
 
 mysql = MySQL(app)
 

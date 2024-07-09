@@ -106,7 +106,7 @@ content%}
       {% endif %} {% endwith %}
       <div
         class="g-recaptcha"
-        data-sitekey="6LcWYgoqAAAAAMzciSqgR3_AFtFUoC6-83YGOGuA"
+        data-sitekey="{{ config.RECAPTCHA_PUBLIC_KEY }}"
       ></div>
       <div class="mb-3 custom1">
         {{ form.submit(class = "btn btn-success") }}
