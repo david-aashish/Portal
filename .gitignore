@@ -1,8 +1,0 @@
-# Ignore environment variables file
-pw.env
-
-# Ignore Configuration file
-config.py
-
-# Ignore Python bytecode files
-*.pyc
