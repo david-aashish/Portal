@@ -71,7 +71,7 @@ content %}
         name="password"
         class="form-control"
       />
-      <a href= "#" class="d-block mt-2">Forgot Password?</a>
+      <a href= "{{ url_for('forgot_password') }}" class="d-block mt-2">Forgot Password?</a>
       <h6 class="help">
         Don't have an existing account? Please click here to create a new
         account: <a href="{{ url_for('signup') }}">Sign-Up</a>

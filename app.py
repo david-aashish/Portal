@@ -1,6 +1,9 @@
 from flask import Flask,render_template,redirect,url_for,flash,request,session
 import bcrypt
+import string
+import random
 from flask_mysqldb import MySQL
+from flask_mail import Mail,Message
 
 from modules.login import Loginform
 from modules.signup import Signupform
@@ -10,6 +13,7 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
+mail = Mail(app)
 mysql = MySQL(app)
 
 @app.route('/')
@@ -33,6 +37,33 @@ def login():
             flash("Invalid credentials,Please re-check")
             return redirect(url_for('login'))
     return render_template('login.html', form = form)
+
+def generate_password():
+    char = string.ascii_letters + string.digits + string.punctuation
+    new_password = ''.join(random.choice(char) for i in range(6)) 
+    return new_password
+
+@app.route('/forgot_password', methods = ['GET','POST'])
+def forgot_password():
+    if(request.method=='POST'):
+        email = request.form['email']
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM userdata WHERE email = %s", (email,))
+        data = cursor.fetchone()
+        if data:
+            new_password = generate_password()
+            hidden_password = bcrypt.hashpw(new_password.encode('utf-8'),bcrypt.gensalt())
+            cursor.execute("UPDATE userdata SET password = %s WHERE email = %s", (hidden_password,email))
+            mysql.connection.commit()
+            msg = Message('Your New Password',recipients=[email])
+            msg.body  = f'Your new Password is: {new_password}'
+            mail.send(msg)
+            flash('Your new password has successfully been sent to your Email ID')
+        else:
+            flash('The email you entered was not Registered.')
+        cursor.close()
+        return redirect(url_for('forgot_password'))
+    return render_template('forgot_password.html')
 
 @app.route('/signup',methods =['GET','POST'])
 def signup():
